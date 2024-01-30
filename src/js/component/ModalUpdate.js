@@ -2,13 +2,24 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 
-export const Modal = props => {
+export const ModalUpdate = props => {
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [phone, setPhone] = useState("");
+	const [address, setAddress] = useState("");
 	const [state, setState] = useState({
 		//initialize state here
 	});
 	const { store, actions } = useContext(Context);
-	const handleDelete = () => {
-		actions.deleteOneContact(props.id);
+	const handleUpdate = () => {
+		const data = {
+			name: name,
+			email: email,
+			agenda_slug: "velazcoCarlos",
+			phone: phone,
+			address: address
+		};
+		actions.updateOneContact(props.id, data);
 	};
 
 	return (
@@ -31,7 +42,48 @@ export const Modal = props => {
 						)}
 					</div>
 					<div className="modal-body">
-						<p>Warning: unknown consequences after this point... Kidding!</p>
+						{/* <form> */}
+						<div className="form-group">
+							<label>Full Name</label>
+							<input
+								type="text"
+								value={name}
+								className="form-control"
+								placeholder="Full Name"
+								onChange={e => setName(e.target.value)}
+							/>
+						</div>
+						<div className="form-group">
+							<label>Email</label>
+							<input
+								type="email"
+								value={email}
+								className="form-control"
+								placeholder="Enter email"
+								onChange={e => setEmail(e.target.value)}
+							/>
+						</div>
+						<div className="form-group">
+							<label>Phone</label>
+							<input
+								type="phone"
+								value={phone}
+								className="form-control"
+								placeholder="Enter phone"
+								onChange={e => setPhone(e.target.value)}
+							/>
+						</div>
+						<div className="form-group">
+							<label>Address</label>
+							<input
+								type="text"
+								value={address}
+								className="form-control"
+								placeholder="Enter address"
+								onChange={e => setAddress(e.target.value)}
+							/>
+						</div>
+						{/* </form> */}
 					</div>
 					<div className="modal-footer">
 						<button
@@ -44,7 +96,7 @@ export const Modal = props => {
 						</button>
 						<button
 							onClick={() => {
-								handleDelete();
+								handleUpdate();
 								props.onClose();
 							}}
 							type="button"
@@ -62,7 +114,7 @@ export const Modal = props => {
  * Define the data-types for
  * your component's properties
  **/
-Modal.propTypes = {
+ModalUpdate.propTypes = {
 	history: PropTypes.object,
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
@@ -73,7 +125,7 @@ Modal.propTypes = {
  * Define the default values for
  * your component's properties
  **/
-Modal.defaultProps = {
+ModalUpdate.defaultProps = {
 	show: false,
 	onClose: null
 };
