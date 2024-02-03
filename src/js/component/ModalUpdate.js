@@ -47,7 +47,7 @@ export const ModalUpdate = props => {
 							<label>Full Name</label>
 							<input
 								type="text"
-								value={name}
+								value={props.name}
 								className="form-control"
 								placeholder="Full Name"
 								onChange={e => setName(e.target.value)}
@@ -57,7 +57,7 @@ export const ModalUpdate = props => {
 							<label>Email</label>
 							<input
 								type="email"
-								value={email}
+								value={props.email}
 								className="form-control"
 								placeholder="Enter email"
 								onChange={e => setEmail(e.target.value)}
@@ -67,7 +67,7 @@ export const ModalUpdate = props => {
 							<label>Phone</label>
 							<input
 								type="phone"
-								value={phone}
+								value={props.phone}
 								className="form-control"
 								placeholder="Enter phone"
 								onChange={e => setPhone(e.target.value)}
@@ -77,7 +77,7 @@ export const ModalUpdate = props => {
 							<label>Address</label>
 							<input
 								type="text"
-								value={address}
+								value={props.address}
 								className="form-control"
 								placeholder="Enter address"
 								onChange={e => setAddress(e.target.value)}
@@ -118,7 +118,11 @@ ModalUpdate.propTypes = {
 	history: PropTypes.object,
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
-	id: PropTypes.number
+	id: PropTypes.number,
+	name: PropTypes.string,
+	email: PropTypes.string,
+	phone: PropTypes.string,
+	address: PropTypes.string
 };
 
 /**

@@ -45,10 +45,19 @@ export const Contacts = () => {
 				</div>
 			</div>
 			<Modal id={state.id} show={state.showModal} onClose={() => setState({ showModal: false })} />
-			<ModalUpdate
+			{/* <ModalUpdate
 				id={state.id}
 				show={state.showModalUpdate}
 				onClose={ac => setState({ showModalUpdate: false })}
+			/> */}
+			<ModalUpdate
+				id={state.id}
+				name={store.listContacts.find(contact => contact.id === state.id)?.full_name || ""}
+				email={store.listContacts.find(contact => contact.id === state.id)?.email || ""}
+				phone={store.listContacts.find(contact => contact.id === state.id)?.phone || ""}
+				address={store.listContacts.find(contact => contact.id === state.id)?.address || ""}
+				show={state.showModalUpdate}
+				onClose={() => setState({ showModalUpdate: false })}
 			/>
 		</div>
 	);
