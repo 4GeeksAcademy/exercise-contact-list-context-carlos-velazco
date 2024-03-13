@@ -3,14 +3,20 @@ import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 
 export const ModalUpdate = props => {
-	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
-	const [phone, setPhone] = useState("");
-	const [address, setAddress] = useState("");
-	const [state, setState] = useState({
-		//initialize state here
-	});
+	const [name, setName] = useState(props.name);
+	const [email, setEmail] = useState(props.email);
+	const [phone, setPhone] = useState(props.phone);
+	const [address, setAddress] = useState(props.address);
+	const [state, setState] = useState({});
 	const { store, actions } = useContext(Context);
+
+	useEffect(() => {
+		setName(props.name);
+		setEmail(props.email);
+		setPhone(props.phone);
+		setAddress(props.address);
+	}, [props]);
+
 	const handleUpdate = () => {
 		const data = {
 			name: name,
@@ -20,8 +26,9 @@ export const ModalUpdate = props => {
 			address: address
 		};
 		actions.updateOneContact(props.id, data);
+		props.onClose();
 	};
-
+	console.log(name);
 	return (
 		<div className="modal" tabIndex="-1" role="dialog" style={{ display: props.show ? "inline-block" : "none" }}>
 			<div className="modal-dialog" role="document">
@@ -47,7 +54,7 @@ export const ModalUpdate = props => {
 							<label>Full Name</label>
 							<input
 								type="text"
-								value={props.name}
+								value={name}
 								className="form-control"
 								placeholder="Full Name"
 								onChange={e => setName(e.target.value)}
@@ -57,7 +64,7 @@ export const ModalUpdate = props => {
 							<label>Email</label>
 							<input
 								type="email"
-								value={props.email}
+								value={email}
 								className="form-control"
 								placeholder="Enter email"
 								onChange={e => setEmail(e.target.value)}
@@ -67,7 +74,7 @@ export const ModalUpdate = props => {
 							<label>Phone</label>
 							<input
 								type="phone"
-								value={props.phone}
+								value={phone}
 								className="form-control"
 								placeholder="Enter phone"
 								onChange={e => setPhone(e.target.value)}
@@ -77,7 +84,7 @@ export const ModalUpdate = props => {
 							<label>Address</label>
 							<input
 								type="text"
-								value={props.address}
+								value={address}
 								className="form-control"
 								placeholder="Enter address"
 								onChange={e => setAddress(e.target.value)}

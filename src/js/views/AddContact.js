@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export const AddContact = () => {
 	// const [inputData, setInputData] = useState();
@@ -12,7 +13,7 @@ export const AddContact = () => {
 
 	const handleCreateContact = e => {
 		e.preventDefault();
-		// if (name != "" && email != "" && phone != "" && address != "") {
+
 		const data = {
 			name: name,
 			email: email,
@@ -20,7 +21,7 @@ export const AddContact = () => {
 			phone: phone,
 			address: address
 		};
-		// }
+
 		actions.createOneContact(data);
 
 		setName("");
@@ -74,9 +75,11 @@ export const AddContact = () => {
 							onChange={e => setAddress(e.target.value)}
 						/>
 					</div>
+
 					<button type="submit" className="btn btn-primary form-control">
 						save
 					</button>
+
 					<Link className="mt-3 w-100 text-center" to="/">
 						or get back to contacts
 					</Link>
